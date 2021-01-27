@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { Route } from 'react-router-dom'
+import GroupList from './pages/GroupList'
+import StudentsList from './pages/StudentsList'
+import Header from './components/Header'
+import ButtonAddItem from './components/ButtonAddItem'
 
 function App() {
+
+  // удалить пункт списка
+  const deleteItem = (key, value) => {
+    const items = JSON.parse(localStorage.getItem(key))
+    const newItems = items.filter(item => item['id'] !== value)
+    localStorage.setItem(key, JSON.stringify(newItems))
+  }
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="container">
+        <Header />
+        <ButtonAddItem />
+        <div className="content">
+          <Route path="/" exact>
+            <GroupList deleteItem={deleteItem} />
+          </Route>
+          <Route path="/students-list" exact>
+            <StudentsList deleteItem={deleteItem} />
+          </Route>
+        </div>
+      </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
