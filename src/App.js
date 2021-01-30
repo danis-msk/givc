@@ -1,18 +1,11 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
-import GroupList from './pages/GroupList'
-import StudentsList from './pages/StudentsList'
+import GroupList from './pages/GroupPage'
+import StudentsList from './pages/StudentsPage'
 import Header from './components/Header'
 import ButtonAddItem from './components/ButtonAddItem'
 
 function App() {
-
-  // удалить пункт списка
-  const deleteItem = (key, value) => {
-    const items = JSON.parse(localStorage.getItem(key))
-    const newItems = items.filter(item => item['id'] !== value)
-    localStorage.setItem(key, JSON.stringify(newItems))
-  }
   
   return (
     <div className="App">
@@ -20,12 +13,8 @@ function App() {
         <Header />
         <ButtonAddItem />
         <div className="content">
-          <Route path="/" exact>
-            <GroupList deleteItem={deleteItem} />
-          </Route>
-          <Route path="/students-list" exact>
-            <StudentsList deleteItem={deleteItem} />
-          </Route>
+          <Route path="/" component={GroupList} exact />
+          <Route path="/students-list" component={StudentsList} exact />
         </div>
       </div>
     </div>

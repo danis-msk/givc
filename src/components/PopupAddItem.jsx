@@ -13,12 +13,12 @@ const PopupAddItem = ({updateStateStudents = ()=>{}, updateStateGroup = ()=>{}})
   useEffect(() => {
 
     // добавить класс header__item--active при загрузке страницы
-    if (document.querySelector('.group-list')) {
-      document.querySelector('.header__item--group-list').classList.add('header__item--active')
-    }
-    if (document.querySelector('.students-list')) {
-      document.querySelector('.header__item--students-list').classList.add('header__item--active')
-    }
+    // if (document.querySelector('.group-list')) {
+    //   document.querySelector('.header__item--group-list').classList.add('header__item--active')
+    // }
+    // if (document.querySelector('.students-list')) {
+    //   document.querySelector('.header__item--students-list').classList.add('header__item--active')
+    // }
 
     // открыть попап при клике на кнопку "Добавить"
     document.querySelector('.button-add-item').addEventListener('click', toggleVisiblePopup)
@@ -30,9 +30,9 @@ const PopupAddItem = ({updateStateStudents = ()=>{}, updateStateGroup = ()=>{}})
 
   useEffect(() => {
     // проверка страницы для добавляения input для списка студентов
-    if (document.querySelector('.header__item--active').classList.contains('header__item--students-list')) {
-      setPageStudents(true)
-    }
+    // if (document.querySelector('.header__item--active').classList.contains('header__item--students-list')) {
+    //   setPageStudents(true)
+    // }
   })
   
   // очистка событий
@@ -58,60 +58,60 @@ const PopupAddItem = ({updateStateStudents = ()=>{}, updateStateGroup = ()=>{}})
   // добавить пункт в список
   const addItem = (event) => {
     event.preventDefault()
-    const student = studentRef.current ? studentRef.current.value : null
-    const group = groupRef.current.value
-    let idGroup
-    let idStudent
+    // const student = studentRef.current ? studentRef.current.value.trim() : null
+    // const group = groupRef.current.value.trim()
+    // let idGroup
+    // let idStudent
 
-    if ((!student && student !== null) || !group) {
-      return alert('Введите данные')
-    }
+    // if ((!student && student !== null) || !group) {
+    //   return alert('Введите данные')
+    // }
 
-    let groups = JSON.parse(localStorage.getItem('groups'))
+    // let groups = JSON.parse(localStorage.getItem('groups'))
 
-    if (groups !== null && groups.length) {
-      groups.forEach(el => {
-        if (el['name'] === group) {
-          idGroup = el['id']
-        }
-      })
-      if (idGroup === undefined) {
-        idGroup = groups[groups.length-1]['id'] + 1
-        groups = [
-          ...groups,
-          {'id': idGroup, 'name': group}
-        ]
-      }
-    } else {
-      idGroup = 0
-      groups = [
-        {'id': idGroup, 'name': group}
-      ]
-    }
+    // if (groups !== null && groups.length) {
+    //   groups.forEach(el => {
+    //     if (el['name'] === group) {
+    //       idGroup = el['id']
+    //     }
+    //   })
+    //   if (idGroup === undefined) {
+    //     idGroup = groups[groups.length-1]['id'] + 1
+    //     groups = [
+    //       ...groups,
+    //       {'id': idGroup, 'name': group}
+    //     ]
+    //   }
+    // } else {
+    //   idGroup = 0
+    //   groups = [
+    //     {'id': idGroup, 'name': group}
+    //   ]
+    // }
 
-    localStorage.setItem('groups', JSON.stringify(groups))
+    // localStorage.setItem('groups', JSON.stringify(groups))
 
-    if (student !== null) {
-      let students = JSON.parse(localStorage.getItem('students'))
-      if (students != null && students.length) {
-        idStudent = students[students.length-1]['id'] + 1
-        students = [
-          ...students,
-          {'id': idStudent, 'name': student, 'id_group': idGroup}
-        ]
-      } else {
-        students = [
-          {'id': 0, 'name': student, 'id_group': idGroup}
-        ]
-      }
+    // if (student !== null) {
+    //   let students = JSON.parse(localStorage.getItem('students'))
+    //   if (students != null && students.length) {
+    //     idStudent = students[students.length-1]['id'] + 1
+    //     students = [
+    //       ...students,
+    //       {'id': idStudent, 'name': student, 'id_group': idGroup}
+    //     ]
+    //   } else {
+    //     students = [
+    //       {'id': 0, 'name': student, 'id_group': idGroup}
+    //     ]
+    //   }
 
-      localStorage.setItem('students', JSON.stringify(students))
-    }
-    updateStateStudents()
-    updateStateGroup()
-    toggleVisiblePopup()
-    studentRef.current && (studentRef.current.value = '')
-    groupRef.current.value = ''
+    //   localStorage.setItem('students', JSON.stringify(students))
+    // }
+    // updateStateStudents()
+    // updateStateGroup()
+    // toggleVisiblePopup()
+    // studentRef.current && (studentRef.current.value = '')
+    // groupRef.current.value = ''
   }
   
   
